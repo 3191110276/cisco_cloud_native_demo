@@ -1,0 +1,18 @@
+kind: pipeline
+name: Build
+steps:
+
+
+# CATALOG
+- name: build_catalog
+  image: plugins/docker
+  depends_on: [ clone ]
+  settings:
+   repo: mimaurer/cndemo-catalog
+   context: ./images/catalog/
+   dockerfile: ./images/catalog/Dockerfile
+   tags: [ "v${DRONE_BUILD_NUMBER}-${DRONE_COMMIT_BRANCH}", "${DRONE_COMMIT_BRANCH}", "latest" ]
+   username:
+     from_secret: DOCKERHUB_USERNAME
+   password:
+     from_secret: DOCKERHUB_PASSWORD
