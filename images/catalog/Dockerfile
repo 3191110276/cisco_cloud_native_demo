@@ -1,4 +1,4 @@
-FROM node:12-slim
+FROM node:18.4-slim
 
 WORKDIR /app
 
@@ -8,4 +8,4 @@ RUN npm install
 
 EXPOSE 80
 
-ENTRYPOINT ["node", "./index.js", "80"]
+ENTRYPOINT ["node", "./index.js", "80", "--require", "tracing.js"]
