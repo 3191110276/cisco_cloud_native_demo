@@ -1,11 +1,11 @@
-FROM node:18.4-slim
+FROM python:3.9-slim
 
-WORKDIR /app
+WORKDIR /code
 
 COPY . .
 
-RUN npm install
+RUN pip install -r requirements.txt
 
 EXPOSE 80
 
-ENTRYPOINT ["node", "./index.js", "80", "--require", "tracing.js"]
+ENTRYPOINT ["gunicorn", "--config gunicorn_config.py", "app.wsgi:app"]
