@@ -10,4 +10,6 @@ RUN telescope-bootstrap
 
 EXPOSE 80
 
-ENTRYPOINT ["gunicorn", "--config gunicorn_config.py", "app.wsgi:app"]
+RUN chmod 744 ./startup.sh
+
+ENTRYPOINT ["./startup.sh"]
