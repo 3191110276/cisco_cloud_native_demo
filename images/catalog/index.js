@@ -25,10 +25,10 @@ app.get('/', (req, res) => {
       method: 'GET'
     };
 
-    const req = http.request(options, res => {
-      console.log(`statusCode: ${res.statusCode}`);
+    const out_req = http.request(options, out_res => {
+      console.log(`statusCode: ${out_res.statusCode}`);
 
-      res.on('data', d => {
+      out_res.on('data', d => {
         process.stdout.write(d);
       });
     });
