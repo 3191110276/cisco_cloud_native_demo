@@ -5,4 +5,4 @@ const userOptions = {
   ciscoToken: process.env.TELESCOPE_TOKEN,
 };
 
-await ciscoTracing.init(userOptions);
+ciscoTracing.init(userOptions);
