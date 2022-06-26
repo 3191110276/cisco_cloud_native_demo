@@ -3,6 +3,14 @@ import json
 import requests
 import logging
 import sys
+import os
+
+
+from cisco_telescope import tracing
+tracing.init(
+  service_name="asdf",
+  cisco_token="os.getenv('TELESCOPE_TOKEN')"
+)
 
 
 app = Flask(__name__)
