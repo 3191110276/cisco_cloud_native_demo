@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
       "price": 12.99
     }]
 
-    res.json(response)
+    res.json(data)
 });
 
 
