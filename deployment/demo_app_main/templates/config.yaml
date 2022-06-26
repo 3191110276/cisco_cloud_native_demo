@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cndemo-config
+  namespace: {{ .Release.Namespace }}
+data:
+  TELESCOPE_TOKEN: {{ .Values.telescope_token }}

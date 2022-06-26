@@ -1,0 +1,6 @@
+apiVersion: v2
+name: demo_app_main
+description: Cisco Cloud-Native Demo Application - Main Clusters
+type: application
+version: 0.1.0
+appVersion: "1.0.0"

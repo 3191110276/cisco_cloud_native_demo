@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: catalog
+  namespace: {{ .Release.Namespace }}
+  labels:
+    group: cndemo
+    app: catalog
+spec:
+  type: ClusterIP
+  selector:
+    group: cndemo
+    app: catalog
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    group: cndemo
+    app: catalog
+  name: catalog
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      group: cndemo
+      app: catalog
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        group: cndemo
+        app: catalog
+    spec:
+      containers:
+      - name: catalog
+        image: mimaurer/cndemo-catalog:{{ .Values.version }}
+        imagePullPolicy: Always
+        envFrom:
+        - configMapRef:
+            name: cndemo-config
+        ports:
+        - name: http
+          containerPort: 80
+          protocol: TCP
+        startupProbe:
+          periodSeconds: 5
+          failureThreshold: 40
+          httpGet:
+            path: /healthz
+            port: http
+        livenessProbe:
+          initialDelaySeconds: 5
+          periodSeconds: 2
+          failureThreshold: 4
+          httpGet:
+            path: /healthz
+            port: http
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 400m
+            memory: 512Mi

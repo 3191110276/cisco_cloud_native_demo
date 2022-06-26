@@ -8,9 +8,11 @@ import os
 
 from cisco_telescope import tracing
 tracing.init(
-  service_name="asdf",
+  service_name="test",
   cisco_token="os.getenv('TELESCOPE_TOKEN')"
 )
+
+print(os.getenv('TELESCOPE_TOKEN'))
 
 
 app = Flask(__name__)
