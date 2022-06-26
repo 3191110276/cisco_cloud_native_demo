@@ -18,6 +18,21 @@ app.get('/', (req, res) => {
 
     console.log('Received request for catalog items')
 
+    const options = {
+      hostname: 'google.com',
+      port: 80,
+      path: '/',
+      method: 'GET'
+    };
+
+    const req = http.request(options, res => {
+      console.log(`statusCode: ${res.statusCode}`);
+
+      res.on('data', d => {
+        process.stdout.write(d);
+      });
+    });
+
     var data = [{
       "id": 1,
       "name": "product1",
